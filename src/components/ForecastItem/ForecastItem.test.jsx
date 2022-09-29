@@ -1,0 +1,1 @@
+test("ForecastItem render", async () => {});
