@@ -9,8 +9,11 @@ import { IconContext } from "react-icons";
 import { WiDaySunny } from "react-icons/wi";
 import { Link as LinkRouter } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import { useMemo } from "react";
 
 const AppFrame = ({ children }) => {
+  const iconContextSize = useMemo(() => ({ size: "2em" }), []);
+
   return (
     <Grid container justifyContent="center">
       <AppBar position="static">
@@ -22,7 +25,7 @@ const AppFrame = ({ children }) => {
               color="inherit"
               aria-label="menu"
             >
-              <IconContext.Provider value={{ size: "2em" }}>
+              <IconContext.Provider value={iconContextSize}>
                 <WiDaySunny></WiDaySunny>
               </IconContext.Provider>
             </Link>

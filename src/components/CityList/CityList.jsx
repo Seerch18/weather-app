@@ -9,17 +9,10 @@ import Alert from "@material-ui/lab/Alert";
 import useCityList from "../../hooks/useCityList";
 import { getCityCode } from "../../utils/utils";
 
-// renderCityAndCountry se va a convertir en una función que retorna otra función
-const renderCityAndCountry =
-  (eventOnClickCity) => (cityAndCountry, weather) => {
-    const { city, countryCode, country } = cityAndCountry;
-    // const { temperature, state } = weather;
+const CityListItem = React.memo(
+  ({ city, countryCode, country, weather, eventOnClickCity }) => {
     return (
-      <ListItem
-        button
-        key={getCityCode(city, countryCode)}
-        onClick={() => eventOnClickCity(city, countryCode)}
-      >
+      <ListItem button onClick={() => eventOnClickCity(city, countryCode)}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item md={8} xs={12}>
             <CityInfo city={city} country={country}></CityInfo>
@@ -34,6 +27,23 @@ const renderCityAndCountry =
           </Grid>
         </Grid>
       </ListItem>
+    );
+  }
+);
+
+CityListItem.displayName = "CityListItem";
+
+// renderCityAndCountry se va a convertir en una función que retorna otra función
+const renderCityAndCountry =
+  (eventOnClickCity) => (cityAndCountry, weather) => {
+    const { city, countryCode } = cityAndCountry;
+    return (
+      <CityListItem
+        key={getCityCode(city, countryCode)}
+        eventOnClickCity={eventOnClickCity}
+        weather={weather}
+        {...cityAndCountry}
+      ></CityListItem>
     );
   };
 
@@ -76,4 +86,4 @@ CityList.propTypes = {
   onClickCity: PropTypes.func.isRequired,
 };
 
-export default CityList;
+export default React.memo(CityList);
