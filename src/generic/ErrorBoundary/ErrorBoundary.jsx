@@ -1,6 +1,6 @@
 import React from "react";
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.PureComponent {
   // constructor
   constructor(props) {
     super(props);
@@ -38,7 +38,7 @@ class ErrorBoundary extends React.Component {
 
   // render
   render() {
-    return this.state.hasError ? <h1>Hulbo un error</h1> : this.props.children;
+    return this.state.hasError ? <h1>Hubo un error</h1> : this.props.children;
   }
 }
 

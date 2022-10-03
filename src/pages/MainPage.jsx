@@ -8,10 +8,13 @@ import { getCities } from "../utils/serverCities";
 
 const MainPage = ({ actions, data }) => {
   const navigate = useNavigate();
-  const onClickHandler = (city, countryCode) => {
-    // navigate.push permite alterar la URL por programación
-    navigate(`/city/${countryCode}/${city}`);
-  };
+  const onClickHandler = React.useCallback(
+    (city, countryCode) => {
+      // navigate.push permite alterar la URL por programación
+      navigate(`/city/${countryCode}/${city}`);
+    },
+    [navigate]
+  );
   return (
     <AppFrame>
       <Paper elevation={3}>
